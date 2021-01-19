@@ -1,46 +1,41 @@
 package com.gzq.yiyuan.controller;
 
-
-import com.gzq.yiyuan.entiy.User;
 import com.gzq.yiyuan.result.AjaxResult;
 import com.gzq.yiyuan.service.UserService;
+import com.gzq.yiyuan.service.token.TokenService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/user")
+/**
+ * @author SongYC
+ */
+@Api(value = "登录功能")
+@Slf4j
+@RestController
+@RequestMapping("/user/form")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/")
-    public String index(User user,Model model){
-        model.addAttribute(user);
-        return "index";
-    }
+    @Autowired
+    TokenService tokenService;
     /****
-     *注册功能
+     *登录功能
      *
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public AjaxResult add(@RequestBody User user) {
-        return AjaxResult.success(userService.insertSelective(user));
+    @ApiOperation(value = "登录")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public AjaxResult login(@RequestParam("mobile") String mobile, @RequestParam("password") String password) {
+        return AjaxResult.success(userService.login(mobile, password));
     }
-    /****
-     *注册功能
-     *
-     *
-     */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public AjaxResult Login(@RequestBody User user) {
-        return AjaxResult.success(userService.insertSelective(user));
-    }
+
+
+
+
 
 
 }
