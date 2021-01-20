@@ -1,15 +1,18 @@
 package com.gzq.yiyuan.entiy;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * user
  * @author 
  */
 @Data
-public class User implements Serializable {
+public class User implements UserDetails {
     /**
      * 用户ID
      */
@@ -72,4 +75,34 @@ public class User implements Serializable {
     private Boolean deleted;
 
     private static final long serialVersionUID = 1L;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

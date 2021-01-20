@@ -37,6 +37,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
+        System.out.println(arg0.getRequestURI());
         //此处为不需要登录的接口放行
         if (arg0.getRequestURI().contains("/login") || arg0.getRequestURI().contains("/register") || arg0.getRequestURI().contains("/error") || arg0.getRequestURI().contains("/static")) {
             return true;
@@ -57,11 +58,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         //解析Token信息
         try {
-            Claims claims = Jwts.parser().setSigningKey("preRead").parseClaimsJws(headerToken).getBody();
+            Claims claims = Jwts.parser().setSigningKey("iwqjhda8232bjgh432").parseClaimsJws(headerToken).getBody();
+            System.out.println(claims);
             String tokenUserId = (String) claims.get("userId");
             long iTokenUserId = Long.parseLong(tokenUserId);
             //根据客户Token查找数据库Token
-            Token myToken = tokenDao.selectByPrimaryKey(iTokenUserId);
+            Token myToken = tokenDao.selectByPrimaryKeyUser(iTokenUserId);
 
             //数据库没有Token记录
             if (null == myToken) {

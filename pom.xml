@@ -50,6 +50,10 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!-- 生成token -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

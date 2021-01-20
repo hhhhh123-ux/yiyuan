@@ -14,6 +14,8 @@ public interface UserDao {
 
     User selectByMobilePassword(@Param("mobile") String mobile, @Param("password") String password);
 
+    User selectByName(@Param("name") String username);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

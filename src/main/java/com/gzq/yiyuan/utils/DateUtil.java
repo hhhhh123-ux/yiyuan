@@ -215,6 +215,7 @@ public class DateUtil {
         return formatDate(new Date(), "yyyy-MM-dd");
     }
 
+
     /**
      * 将给定的日期格式化为"yyyy-MM-dd hh:mm:ss"格式的字符串
      *

@@ -1,6 +1,7 @@
 package com.gzq.yiyuan.service;
 
 import com.gzq.yiyuan.entiy.User;
+import com.gzq.yiyuan.entiy.token.Token;
 import com.gzq.yiyuan.result.AjaxResult;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +18,9 @@ public interface UserService {
 
     User selectByMobilePassword(@Param("mobile") String mobile,@Param("password") String password);
 
-    AjaxResult<User> login(@Param("mobile") String mobile, @Param("password") String password);
+    User selectByName(@Param("username") String username);
+
+    AjaxResult<Token> login(@Param("mobile") String mobile, @Param("password") String password);
 
     int updateByPrimaryKeySelective(User record);
 
